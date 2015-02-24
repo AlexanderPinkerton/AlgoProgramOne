@@ -1,7 +1,6 @@
 /**
- * Created by Ace on 1/31/15.
+ * Created by Alexander Pinkerton on 2/11/15.
  */
-
 
 public class QuickSort {
 
