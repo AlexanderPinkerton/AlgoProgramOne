@@ -12,14 +12,14 @@ public class Driver {
         BufferedReader br;
         String line;
 
-        int counter = 1, lessThan = 0, x = 0;
+        int counter = 1, x = 0;
         int[] array;
 
         try {
-
+            String inputFile = JOptionPane.showInputDialog(null,"Enter a Input Filename");
             //====================================LOOP ONE   O( n )=========================================
             //Read the contents of the file in line by line.
-            br = new BufferedReader(new FileReader("INPUT.txt"));
+            br = new BufferedReader(new FileReader(inputFile));
             while ((line = br.readLine()) != null) {
                 // if it is the first line of the file, obtain x.
                 if (counter == 1) {
@@ -41,10 +41,6 @@ public class Driver {
                 // process the line.
                 if(counter != 1) {
                     array[counter - 2] = Integer.parseInt(line);
-                    //While inserting values into array, increment a counter if the value was less or equal to x.
-                    if(Integer.parseInt(line) <= x){
-                        lessThan++;
-                    }
                 }
                 counter++;
             }
@@ -73,16 +69,19 @@ public class Driver {
                 InsertionSort.insertionSort(array);
             }
 
+            //Preform a binary search for x and add one to it for the array offset to get the total integers <= x
+            int xIndex = BinarySearch.binarySearch(array,x) + 1;
+
 
 
             //==================================== OUTPUT  O( n ) =========================================
             //Output the processed data.
             FileWriter writer = new FileWriter("OUTPUT.txt");
             //Write the number of numbers less than or equal to x
-            writer.append(lessThan + "\n");
+            writer.append(xIndex + "\n");
 
             //debug output
-            System.out.println(lessThan);
+            System.out.println(xIndex);
 
             for(int i=0;i<array.length;i++){
                 //debug output
@@ -96,7 +95,8 @@ public class Driver {
 
 
         }catch (IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("That File Was Not Found.");
         }
 
 
